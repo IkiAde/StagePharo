@@ -1,16 +1,15 @@
 Class {
-	#name : 'SparseMatrix',
-	#superclass : 'Object',
+	#name : #SparseMatrix,
+	#superclass : #Object,
 	#instVars : [
 		'rows',
 		'columns',
 		'values'
 	],
-	#category : 'Exercice1',
-	#package : 'Exercice1'
+	#category : 'Exercice1'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SparseMatrix class >> rows: r columns: c [ 
     ^self new
         rows: r;
@@ -18,17 +17,17 @@ SparseMatrix class >> rows: r columns: c [
         values: Dictionary new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> addColumn: aColumn [
 	columns add: aColumn
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> addRow: aRow [
 	rows add: aRow
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> addValueAt: rowIndex column: colIndex data: aData [
 
 	|key| 
@@ -36,17 +35,17 @@ SparseMatrix >> addValueAt: rowIndex column: colIndex data: aData [
 	values at: key put: aData 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> columns [ 
 	^columns
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> columns: c [ 
 	columns:= c
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> fromSimpleMatrix: aSimpleMatrix [ 
     rows := OrderedCollection new.
     columns := OrderedCollection new.
@@ -65,7 +64,7 @@ SparseMatrix >> fromSimpleMatrix: aSimpleMatrix [
 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SparseMatrix >> initialize [
 	 super initialize.
     rows := OrderedCollection new.
@@ -73,24 +72,24 @@ SparseMatrix >> initialize [
     values := Dictionary new.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> printString [ 
     ^ values printString
 
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> rows [
 	^rows
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> rows: r [ 
 	rows:=r
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> toTraditionalMatrix [
     | maxRow maxCol traditionalMatrix |
     maxRow := rows max + 1.
@@ -114,7 +113,7 @@ SparseMatrix >> toTraditionalMatrix [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> valueAt: rowIndex column: colIndex [ 
 
 	|key|
@@ -122,12 +121,12 @@ SparseMatrix >> valueAt: rowIndex column: colIndex [
 	^ values at: key ifAbsent: 0 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> values [
 	^values 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SparseMatrix >> values: v [ 
 	values:= v
 ]
