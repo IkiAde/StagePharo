@@ -45,6 +45,13 @@ SparseMatrix >> initialize [
 ]
 
 { #category : 'accessing' }
+SparseMatrix >> printString [ 
+    ^ values printString
+
+
+]
+
+{ #category : 'accessing' }
 SparseMatrix >> rows [
 	^rows
 ]
