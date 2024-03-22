@@ -6,7 +6,7 @@ Class {
 		'columns',
 		'values'
 	],
-	#category : 'Exercice1'
+	#category : #Exercice1
 }
 
 { #category : #'instance creation' }
