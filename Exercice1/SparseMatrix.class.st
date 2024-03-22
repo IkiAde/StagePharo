@@ -10,6 +10,22 @@ Class {
 	#package : 'Exercice1'
 }
 
+{ #category : 'instance creation' }
+SparseMatrix class >> rows: r columns: c [ 
+    ^self new
+        rows: r;
+        columns: c;
+        values: Dictionary new
+]
+
+{ #category : 'accessing' }
+SparseMatrix >> addValueAt: rowIndex column: colIndex data: aData [
+
+	|key| 
+	key:= rowIndex asString, '-' , colIndex asString.
+	values at: key put: aData 
+]
+
 { #category : 'accessing' }
 SparseMatrix >> columns [ 
 	^columns
@@ -28,6 +44,14 @@ SparseMatrix >> rows [
 { #category : 'accessing' }
 SparseMatrix >> rows: r [ 
 	rows:=r
+]
+
+{ #category : 'accessing' }
+SparseMatrix >> valueAt: rowIndex column: colIndex [ 
+
+	|key|
+	key:= rowIndex asString, '-' , colIndex asString.
+	^ values at: key ifAbsent: 0 
 ]
 
 { #category : 'accessing' }
