@@ -36,6 +36,14 @@ SparseMatrix >> columns: c [
 	columns:= c
 ]
 
+{ #category : 'initialization' }
+SparseMatrix >> initialize [
+	 super initialize.
+    rows := OrderedCollection new.
+    columns := OrderedCollection new.
+    values := Dictionary new.
+]
+
 { #category : 'accessing' }
 SparseMatrix >> rows [
 	^rows
