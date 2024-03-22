@@ -16,11 +16,26 @@ SparseMatrix >> columns [
 ]
 
 { #category : 'accessing' }
+SparseMatrix >> columns: c [ 
+	columns:= c
+]
+
+{ #category : 'accessing' }
 SparseMatrix >> rows [
 	^rows
 ]
 
 { #category : 'accessing' }
+SparseMatrix >> rows: r [ 
+	rows:=r
+]
+
+{ #category : 'accessing' }
 SparseMatrix >> values [
 	^values 
+]
+
+{ #category : 'accessing' }
+SparseMatrix >> values: v [ 
+	values:= v
 ]
