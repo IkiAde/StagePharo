@@ -18,3 +18,32 @@ JavadocPackage >> generateDocumentationForClass: aClass [
     ^ classDocumentation
 
 ]
+
+{ #category : #'as yet unclassified' }
+JavadocPackage >> generateDocumentationForPackage: packageName [ 
+    | package doc |
+
+    package := RPackageOrganizer default packageNamed: packageName ifAbsent: [ ^ 'Le package n''existe pas' ].
+    doc := String new.
+    package classes do: [ :eachClass | 
+        doc := doc , (self generateDocumentationForClass: eachClass), String cr.
+    ].
+
+    ^ doc
+]
+
+{ #category : #'as yet unclassified' }
+JavadocPackage >> generateMethodDocumentationForClass: aClass [ 
+    | methodDocumentation |
+
+    methodDocumentation := String new.
+    aClass selectors do: [ :selector |
+        | method |
+        method := aClass compiledMethodAt: selector.
+        methodDocumentation := methodDocumentation, 'Méthode: ', selector asString, String cr.
+        methodDocumentation := methodDocumentation, 'Senders: ', (SystemNavigation new allCallsOn: method selector) asString, String cr.
+    ].
+
+    ^ methodDocumentation
+
+]
