@@ -47,19 +47,29 @@ SparseMatrix >> columns: c [
 
 { #category : #accessing }
 SparseMatrix >> fromSimpleMatrix: aSimpleMatrix [ 
-    rows := OrderedCollection new.
-    columns := OrderedCollection new.
+    | rowIndexSet colIndexSet |
+    rows := Set new.
+    columns := Set new.
     values := Dictionary new.
-    
+
+    rowIndexSet := Set new.
+    colIndexSet := Set new.
+
     aSimpleMatrix withIndexDo: [ :row :rowIndex |
         row withIndexDo: [ :value :columnIndex |
-            value = 0 ifFalse: [
-                self addRow: rowIndex - 1.
-                self addColumn: columnIndex - 1.
+            value = 0 ifTrue: [
+                rowIndexSet add: rowIndex - 1.
+                colIndexSet add: columnIndex - 1.
+            ] ifFalse: [
                 self addValueAt: rowIndex - 1 column: columnIndex - 1 data: value.
-            ]
-        ]
+            ].
+        ].
     ].
+
+    rows := rowIndexSet asSortedCollection.
+    columns := colIndexSet asSortedCollection.
+
+
 
 
 ]
@@ -73,8 +83,33 @@ SparseMatrix >> initialize [
 ]
 
 { #category : #accessing }
-SparseMatrix >> printString [ 
-    ^ values printString
+SparseMatrix >> prinString [ 
+	^ values printString 
+
+
+
+
+
+]
+
+{ #category : #accessing }
+SparseMatrix >> printString [ [
+    | rowArray |
+    rowArray := (1 to: rows size) collect: [ :i |
+        (1 to: columns size) collect: [ :j |
+            self valueAt: i column: j printString
+        ].
+    ].
+
+    ^ 'SparseMatrix(' , 
+        (rowArray collect: [ :row | row join: ' ' ]) join: ' rows, ', 
+        (columns collect: [ :col | col printString ]) join: ' columns, ', 
+        (values collect: [ :key :value | key printString , '->' , value printString ]) join: ' ', 
+        ' data)'
+]
+
+
+
 
 
 ]
@@ -95,18 +130,21 @@ SparseMatrix >> toTraditionalMatrix [
     maxRow := rows max + 1.
     maxCol := columns max + 1.
     traditionalMatrix := Array new: maxRow.
-    traditionalMatrix := (1 to: maxRow) collect: [ :i |
+    
+    1 to: maxRow do: [ :i |
         | row |
         row := Array new: maxCol.
         row := (1 to: maxCol) collect: [ :j | 0 ].
-        row
+        traditionalMatrix at: i put: row.
     ].
+    
     1 to: values size do: [ :i |
         | rowIndex colIndex |
         rowIndex := (rows at: i) + 1.
         colIndex := (columns at: i) + 1.
         (traditionalMatrix at: rowIndex) at: colIndex put: (values at: i)
     ].
+    
     ^ traditionalMatrix
 
 
