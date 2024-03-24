@@ -93,28 +93,6 @@ SparseMatrix >> prinString [
 ]
 
 { #category : #accessing }
-SparseMatrix >> printString [ [
-    | rowArray |
-    rowArray := (1 to: rows size) collect: [ :i |
-        (1 to: columns size) collect: [ :j |
-            self valueAt: i column: j printString
-        ].
-    ].
-
-    ^ 'SparseMatrix(' , 
-        (rowArray collect: [ :row | row join: ' ' ]) join: ' rows, ', 
-        (columns collect: [ :col | col printString ]) join: ' columns, ', 
-        (values collect: [ :key :value | key printString , '->' , value printString ]) join: ' ', 
-        ' data)'
-]
-
-
-
-
-
-]
-
-{ #category : #accessing }
 SparseMatrix >> rows [
 	^rows
 ]
